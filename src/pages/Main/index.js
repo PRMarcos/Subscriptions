@@ -8,7 +8,7 @@ import { useForm } from "../../services/hooks";
 import { NavBar } from "../../components/NavBar";
 import { Adicionar } from "../../services/firestore";
 import "./Main.css";
-
+import { Button } from "../../components/Button";
 export function Main({ history }) {
   const [ok, setOk] = useState(false);
   const initialState = {
@@ -182,10 +182,7 @@ export function Main({ history }) {
 
           <label for="Check">Concordo com as informaçoes acima.</label>
         </div>
-
-        <button id={ok && "Btn-Enabled"} type="submit" disabled={!ok}>
-          Enviar
-        </button>
+        <Button Disabled={!ok}> Enviar </Button>
       </form>
       <NotificationContainer />
     </div>
