@@ -37,21 +37,3 @@
 .login_main-container form input::placeholder {
   color: #999;
 }
-
-.login_main-container form button {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  border: 0;
-  border-radius: 20px;
-  height: 48px;
-
-  font-size: 16px;
-  background: #ff9900;
-  font-weight: bold;
-  color: #fff;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-}
-.login_main-container form button:hover {
-  background: #faa526;
-}
