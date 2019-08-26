@@ -19,6 +19,6 @@
   cursor: pointer;
 }
 
-#Btn-Enabled:hover {
+.Btn-component:hover {
   background: #faa526;
 }
