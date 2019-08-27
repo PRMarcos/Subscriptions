@@ -6,7 +6,7 @@ import {
   NotificationManager
 } from "react-notifications";
 import "./List.css";
-
+import { Table } from "../../components/Table";
 export function List({ history }) {
   const [values, setValues] = useState([]);
 
@@ -21,6 +21,17 @@ export function List({ history }) {
     });
   }, []);
 
+  const headers = [
+    "Nome",
+    "Idade",
+    "Responsável",
+    "Telefone",
+    "Cidade",
+    "Igreja",
+    "Observaçõs",
+    "Data de pagamento"
+  ];
+
   return (
     <div className="list_main-container">
       <NavBar
@@ -32,37 +43,7 @@ export function List({ history }) {
         }}
       />
       <h1>INSCRITOS</h1>
-
-      <div className="table-container">
-        <table className="Table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Idade</th>
-              <th>Responsável</th>
-              <th>Telefone</th>
-              <th>Cidade</th>
-              <th>Igreja</th>
-              <th>Observaçõs</th>
-              <th>Data de pagamento</th>
-            </tr>
-          </thead>
-          <tbody>
-            {values.map(obj => (
-              <tr key={obj._id}>
-                <td>{obj.KidName}</td>
-                <td>{obj.KidAge}</td>
-                <td>{obj.KidParent}</td>
-                <td>{obj.Phone}</td>
-                <td>{obj.KidCity}</td>
-                <td>{obj.KidChurch}</td>
-                <td>{obj.KidObs}</td>
-                <td>{obj.PaymentDay}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table Headers={headers} Values={values}></Table>
       <NotificationContainer />
     </div>
   );
