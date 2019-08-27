@@ -174,13 +174,13 @@ export function Main({ history }) {
           <p className="contato">Mais informações: (27) 99755-8607 - Bruna</p>
 
           <input
-            Name="Check"
+            name="Check"
             type="checkbox"
             checked={ok}
             onChange={e => setOk(e.target.checked)}
           />
 
-          <label for="Check">Concordo com as informaçoes acima.</label>
+          <label>Concordo com as informaçoes acima.</label>
         </div>
         <Button Disabled={!ok}> Enviar </Button>
       </form>
