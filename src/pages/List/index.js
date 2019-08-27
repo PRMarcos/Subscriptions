@@ -6,7 +6,7 @@ import {
   NotificationManager
 } from "react-notifications";
 import "./List.css";
-import { Table } from "../../components/Table";
+
 export function List({ history }) {
   const [values, setValues] = useState([]);
 
