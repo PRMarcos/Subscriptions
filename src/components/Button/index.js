@@ -6,7 +6,7 @@ export function Button(props) {
   return (
     <button
       className="Btn-component"
-      id={Disabled && "Btn-Disabled"}
+      id={Disabled ? "Btn-Disabled" : undefined}
       disabled={Disabled}
       type={BtnType}
       onClick={btnFunc}
