@@ -1,0 +1,20 @@
+.Input-Component {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  height: 48px;
+  width: 100%;
+  padding: 0 20px;
+
+  font-size: 16px;
+  color: #666;
+}
+
+#is-invalid {
+  border: 1px solid red;
+  background-color: rgb(255, 220, 220);
+}
+
+.Input-Component::placeholder {
+  color: #999;
+}
