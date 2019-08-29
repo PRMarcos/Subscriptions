@@ -1,13 +1,14 @@
 import React from "react";
-import "./NavBar.css";
 import { Button } from "../Button";
+import { Container } from "./style";
+
 export function NavBar(props) {
   const { txtbtn, btnFunc } = props;
   return (
-    <nav className="cmp_Nav-Bar">
+    <Container>
       <Button small BtnType="button" btnFunc={btnFunc}>
         {txtbtn}
       </Button>
-    </nav>
+    </Container>
   );
 }
