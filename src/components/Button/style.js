@@ -12,11 +12,11 @@ export const Btn = styled.button`
   font-weight: bold;
   color: #fff;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
-  background: ${props => (props.Disabled ? "#ffd79b" : "#ff9900")};
+  background: ${props => (props.disabled ? "#ffd79b" : "#ff9900")};
 
   cursor: pointer;
 
   :hover {
-    background: ${props => (props.Disabled ? "#ffd79b" : "#faa526")};
+    background: ${props => (props.disabled ? "#ffd79b" : "#faa526")};
   }
 `;
