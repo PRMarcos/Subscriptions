@@ -1,13 +1,13 @@
 import React from "react";
 import "./NavBar.css";
-
+import { Button } from "../Button";
 export function NavBar(props) {
   const { txtbtn, btnFunc } = props;
   return (
     <nav className="cmp_Nav-Bar">
-      <button type="button" onClick={btnFunc}>
+      <Button small BtnType="button" btnFunc={btnFunc}>
         {txtbtn}
-      </button>
+      </Button>
     </nav>
   );
 }

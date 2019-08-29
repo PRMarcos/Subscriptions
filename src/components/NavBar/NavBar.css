@@ -6,16 +6,3 @@
   background-color: rgba(255, 255, 255, 0.5);
   text-align: right;
 }
-
-.cmp_Nav-Bar button {
-  border: 0;
-  border-radius: 4px;
-  font-size: 12px;
-  padding: 6px;
-  background: #ff9900;
-  font-weight: bold;
-  color: #fff;
-  cursor: pointer;
-  margin-bottom: auto;
-  margin-top: auto;
-}
