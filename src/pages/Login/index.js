@@ -7,6 +7,9 @@ import "react-notifications/lib/notifications.css";
 import { Login, CurrentUser } from "../../services/firestore";
 import "./Login.css";
 import { NavBar } from "../../components/NavBar";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+
 export function LoginPage({ history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,21 +50,23 @@ export function LoginPage({ history }) {
       />
       <form onSubmit={OnSubmit}>
         <h1>Dados de acesso:</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+
+        <Input
+          Name="email"
+          Value={email}
+          OnChange={e => setEmail(e.target.value)}
+          Type="email"
+          Placeholder="Email"
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+        <Input
+          Name="password"
+          Value={password}
+          OnChange={e => setPassword(e.target.value)}
+          Type="password"
+          Placeholder="Senha"
         />
-        <button type="submit">Entrar</button>
+
+        <Button>Entrar</Button>
       </form>
       <NotificationContainer />
     </div>

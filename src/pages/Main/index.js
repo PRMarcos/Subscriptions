@@ -8,6 +8,8 @@ import { useForm } from "../../services/hooks";
 import { NavBar } from "../../components/NavBar";
 import { Adicionar } from "../../services/firestore";
 import "./Main.css";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 
 export function Main({ history }) {
   const [ok, setOk] = useState(false);
@@ -104,88 +106,94 @@ export function Main({ history }) {
       />
       <form onSubmit={onSubmit}>
         <h1>INSCRIÇÕES</h1>
-        <input
-          className={errors.KidName && "is-invalid"}
-          name="KidName"
-          value={values.KidName}
-          onChange={onChange}
-          type="text"
-          placeholder="Nome da criança"
+
+        <Input
+          IsInvalid={errors.KidName}
+          Name="KidName"
+          Value={values.KidName}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Nome da criança"
         />
-        <input
-          className={errors.KidAge && "is-invalid"}
-          name="KidAge"
-          placeholder="Idade da criança"
-          value={values.KidAge}
-          onChange={onChange}
-          type="number"
+
+        <Input
+          IsInvalid={errors.KidAge}
+          Name="KidAge"
+          Value={values.KidAge}
+          OnChange={onChange}
+          Type="number"
+          Placeholder="Idade da criança"
         />
-        <input
-          className={errors.KidParent && "is-invalid"}
-          name="KidParent"
-          value={values.KidParent}
-          onChange={onChange}
-          placeholder="Responsável"
-          type="text"
+
+        <Input
+          IsInvalid={errors.KidParent}
+          Name="KidParent"
+          Value={values.KidParent}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Responsável"
         />
-        <input
-          className={errors.Phone && "is-invalid"}
-          name="Phone"
-          value={values.Phone}
-          onChange={onChange}
-          placeholder="Tel. Somente nímeros com DDD"
-          type="text"
+
+        <Input
+          IsInvalid={errors.Phone}
+          Name="Phone"
+          Value={values.Phone}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Tel. Somente nímeros com DDD"
         />
-        <input
-          className={errors.KidChurch && "is-invalid"}
-          name="KidChurch"
-          value={values.KidChurch}
-          onChange={onChange}
-          placeholder="Igreja"
-          type="text"
+
+        <Input
+          IsInvalid={errors.KidChurch}
+          Name="KidChurch"
+          Value={values.KidChurch}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Igreja"
         />
-        <input
-          className={errors.KidCity && "is-invalid"}
-          name="KidCity"
-          value={values.KidCity}
-          onChange={onChange}
-          placeholder="Cidade"
-          type="text"
+
+        <Input
+          IsInvalid={errors.KidCity}
+          Name="KidCity"
+          Value={values.KidCity}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Cidade"
         />
-        <input
-          className={errors.KidObs && "is-invalid"}
-          name="KidObs"
-          value={values.KidObs}
-          onChange={onChange}
-          placeholder="Restrições alimetares ou remédios"
-          type="text"
+
+        <Input
+          IsInvalid={errors.KidObs}
+          Name="KidObs"
+          Value={values.KidObs}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Restrições alimetares ou remédios"
         />
-        <input
-          className={errors.PaymentDay && "is-invalid"}
-          name="PaymentDay"
-          value={values.PaymentDay}
-          onChange={onChange}
-          placeholder="Data de pagamento"
-          type="text"
+
+        <Input
+          IsInvalid={errors.PaymentDay}
+          Name="PaymentDay"
+          Value={values.PaymentDay}
+          OnChange={onChange}
+          Type="text"
+          Placeholder="Data de pagamento"
         />
+
         <div className="alert-container">
           <p>{aviso}</p>
           <br></br>
           <p className="contato">Mais informações: (27) 99755-8607 - Bruna</p>
-
+          <br></br>
           <input
-            Name="Check"
+            name="Check"
             type="checkbox"
             checked={ok}
             onChange={e => setOk(e.target.checked)}
           />
 
-          <label for="Check">Concordo com as informaçoes acima.</label>
+          <label>Concordo com as informaçoes acima.</label>
         </div>
-
-        <button id={ok && "Btn-Enabled"} type="submit" disabled={!ok}>
-          Enviar
-        </button>
+        <Button Disabled={!ok}> Enviar </Button>
       </form>
       <NotificationContainer />
     </div>
