@@ -24,11 +24,11 @@ export function List({ history }) {
 
   const headers = [
     "Nome",
+    "Igreja",
     "Idade",
+    "Cidade",
     "Responsável",
     "Telefone",
-    "Cidade",
-    "Igreja",
     "Observaçõs",
     "Data de pagamento"
   ];

@@ -1,11 +1,11 @@
 import React from "react";
-import "./Table.css";
+import { StyledTable, TableContainer } from "./style";
 
 export function Table(props) {
   const { Headers, Values } = props;
   return (
-    <div className="table-container">
-      <table className="Table">
+    <TableContainer>
+      <StyledTable>
         <thead>
           <tr>
             {Headers.map(hd => (
@@ -22,7 +22,7 @@ export function Table(props) {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </StyledTable>
+    </TableContainer>
   );
 }
