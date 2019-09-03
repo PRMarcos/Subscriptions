@@ -1,12 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import firebaseConfig from "../services/firebaseConfig";
+import { app } from "./firebase";
 import { ValidateKid } from "../Models/Kid";
 
-firebase.initializeApp(firebaseConfig);
-
-const Db = firebase.firestore();
+const Db = app.firestore();
+const auth = app.auth();
 
 async function Listar() {
   let dados = [];
@@ -31,7 +27,7 @@ async function Listar() {
     })
     .catch(err => {
       dados = [];
-      throw new Error("Servidor indisponivel");
+      throw new Error(err.code);
     });
   return dados;
 }
@@ -55,32 +51,16 @@ async function Adicionar(insc) {
   return response;
 }
 
-function CurrentUser() {
-  return firebase.auth().currentUser;
-}
-
 async function Login(email, password) {
-  await firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log("logado!");
-    })
-    .catch(function(error) {
-      console.log(error.message);
-    });
+  await auth.signInWithEmailAndPassword(email, password).catch(error => {
+    console.log(error.code, " + ", error.message);
+  });
 }
 
 async function LogOut() {
-  await firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      console.log("Deslogado!");
-    })
-    .catch(function(error) {
-      console.log(error.code, " + ", error.message);
-    });
+  await auth.signOut().catch(function(error) {
+    console.log(error.code, " + ", error.message);
+  });
 }
 
-export { Listar, Adicionar, Login, LogOut, CurrentUser };
+export { Listar, Adicionar, Login, LogOut };

@@ -13,6 +13,7 @@ import { Input } from "../../components/Input";
 
 export function Main({ history }) {
   const [ok, setOk] = useState(false);
+
   const initialState = {
     KidName: "",
     KidChurch: "",
@@ -94,6 +95,7 @@ export function Main({ history }) {
     validateKidsForm,
     notyfyError
   );
+
   const aviso =
     "Sobre o pagamento: Para garantir a vaga e preciso uma entrada de 40 reais e o restante pode ser pago até o dia 29/09. Dá pra passar no cartão e dividir em 4x porém tem um acréscimo de 15% da taxa de cartão (taxa alta devido à necessidade do adiantamento das parcelas)";
   return (
@@ -140,7 +142,7 @@ export function Main({ history }) {
           Value={values.Phone}
           OnChange={onChange}
           Type="text"
-          Placeholder="Tel. Somente nímeros com DDD"
+          Placeholder="Tel. Somente números com DDD"
         />
 
         <Input
