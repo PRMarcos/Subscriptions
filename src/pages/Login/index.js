@@ -1,43 +1,39 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
+import { withRouter, Redirect } from "react-router-dom";
+import { AuthContext } from "../../services/auth";
 import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import { Login, CurrentUser } from "../../services/firestore";
+import { Login } from "../../services/firestore";
 import "./Login.css";
 import { NavBar } from "../../components/NavBar";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
-export function LoginPage({ history }) {
+const LoginPage = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function OnSubmit(e) {
-    e.preventDefault();
+  const handleLogin = useCallback(
+    async event => {
+      event.preventDefault();
+      const { password, email } = event.target.elements;
+      try {
+        await Login(email.value, password.value);
+        history.push("/list");
+      } catch (error) {
+        NotificationManager.error(error.message, "Erro!");
+        console.log(error);
+      }
+    },
+    [history]
+  );
 
-    Login(email, password)
-      .then(() => {
-        if (CurrentUser() != null) {
-          setEmail("");
-          setPassword("");
-          history.push("/list");
-        } else {
-          setEmail("");
-          setPassword("");
-          NotificationManager.error(
-            "Erro ao logar, verifique os dados",
-            "Erro!"
-          );
-        }
-      })
-
-      .catch(e => {
-        setEmail("");
-        setPassword("");
-        NotificationManager.error(e.message, "Erro!");
-      });
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    return <Redirect to="/list" />;
   }
 
   return (
@@ -48,7 +44,7 @@ export function LoginPage({ history }) {
           history.push("/");
         }}
       />
-      <form onSubmit={OnSubmit}>
+      <form onSubmit={handleLogin}>
         <h1>Dados de acesso:</h1>
 
         <Input
@@ -71,4 +67,6 @@ export function LoginPage({ history }) {
       <NotificationContainer />
     </div>
   );
-}
+};
+
+export default withRouter(LoginPage);

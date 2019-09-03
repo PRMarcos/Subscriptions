@@ -13,12 +13,17 @@ export function List({ history }) {
 
   useEffect(() => {
     let lista = [];
+
     async function dados() {
       lista = await Listar();
       setValues(lista);
     }
     dados().catch(e => {
-      NotificationManager.error(e.message, "Erro!");
+      if (e.message === "permission-denied") {
+        NotificationManager.error("É preciso estar logado!", "Erro!", 2000);
+      } else {
+        NotificationManager.error(e.message, "Erro!");
+      }
     });
   }, []);
 
@@ -38,9 +43,7 @@ export function List({ history }) {
       <NavBar
         txtbtn="LogOut"
         btnFunc={() => {
-          LogOut().then(() => {
-            history.push("/");
-          });
+          LogOut().then(() => {});
         }}
       />
       <h1>INSCRITOS</h1>
