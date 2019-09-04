@@ -5,8 +5,8 @@ import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
-import "./List.css";
 import { Table } from "../../components/Table";
+import { Contatiner } from "./style";
 
 export function List({ history }) {
   const [values, setValues] = useState([]);
@@ -39,7 +39,7 @@ export function List({ history }) {
   ];
 
   return (
-    <div className="list_main-container">
+    <Contatiner>
       <NavBar
         txtbtn="LogOut"
         btnFunc={() => {
@@ -49,6 +49,6 @@ export function List({ history }) {
       <h1>INSCRITOS</h1>
       <Table Headers={headers} Values={values}></Table>
       <NotificationContainer />
-    </div>
+    </Contatiner>
   );
 }

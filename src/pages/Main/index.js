@@ -7,7 +7,7 @@ import "react-notifications/lib/notifications.css";
 import { useForm } from "../../services/hooks";
 import { NavBar } from "../../components/NavBar";
 import { Adicionar } from "../../services/firestore";
-import "./Main.css";
+import { Container, AlertContainer } from "./style";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
@@ -99,7 +99,7 @@ export function Main({ history }) {
   const aviso =
     "Sobre o pagamento: Para garantir a vaga e preciso uma entrada de 40 reais e o restante pode ser pago até o dia 29/09. Dá pra passar no cartão e dividir em 4x porém tem um acréscimo de 15% da taxa de cartão (taxa alta devido à necessidade do adiantamento das parcelas)";
   return (
-    <div className="main_main-container">
+    <Container>
       <NavBar
         txtbtn="Admin"
         btnFunc={() => {
@@ -181,10 +181,12 @@ export function Main({ history }) {
           Placeholder="Data de pagamento"
         />
 
-        <div className="alert-container">
+        <AlertContainer>
           <p>{aviso}</p>
           <br></br>
-          <p className="contato">Mais informações: (27) 99755-8607 - Bruna</p>
+          <p>
+            <b>Mais informações: (27) 99755-8607 - Bruna</b>
+          </p>
           <br></br>
           <input
             name="Check"
@@ -194,10 +196,10 @@ export function Main({ history }) {
           />
 
           <label>Concordo com as informaçoes acima.</label>
-        </div>
+        </AlertContainer>
         <Button Disabled={!ok}> Enviar </Button>
       </form>
       <NotificationContainer />
-    </div>
+    </Container>
   );
 }
