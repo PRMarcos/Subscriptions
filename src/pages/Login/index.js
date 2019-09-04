@@ -1,11 +1,8 @@
 import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { AuthContext } from "../../services/auth";
-import {
-  NotificationContainer,
-  NotificationManager
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Login } from "../../services/firestore";
 import { Container } from "./style";
 import { NavBar } from "../../components/NavBar";
@@ -24,7 +21,7 @@ const LoginPage = ({ history }) => {
         await Login(email.value, password.value);
         history.push("/list");
       } catch (error) {
-        NotificationManager.error(error.message, "Erro!");
+        toast.error(error.message);
         console.log(error);
       }
     },
@@ -64,7 +61,7 @@ const LoginPage = ({ history }) => {
 
         <Button>Entrar</Button>
       </form>
-      <NotificationContainer />
+      <ToastContainer />
     </Container>
   );
 };
