@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  NotificationContainer,
-  NotificationManager
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "../../services/hooks";
 import { NavBar } from "../../components/NavBar";
 import { Adicionar } from "../../services/firestore";
@@ -76,16 +73,16 @@ export function Main({ history }) {
   function notyfyError(err) {
     let msgError = "";
     if (Object.keys(err).length === 0) {
-      NotificationManager.success("Inscrição enviada", "Sucesso!");
+      toast.success("Inscrição enviada");
     } else {
-      if (Object.keys(err).length <= 3) {
-        Object.keys(err).forEach(erro => {
-          msgError = msgError + err[erro.valueOf()] + "  ";
-        });
-      } else {
+      if (Object.keys(err).length > 1) {
         msgError = "Existem dados obrigatórios não preenchidos";
+      } else {
+        Object.keys(err).forEach(erro => {
+          msgError = msgError + err[erro.valueOf()] + " \n";
+        });
       }
-      NotificationManager.error(msgError, "Erro!");
+      toast.error(msgError, "Erro!");
     }
   }
 
@@ -199,7 +196,7 @@ export function Main({ history }) {
         </AlertContainer>
         <Button Disabled={!ok}> Enviar </Button>
       </form>
-      <NotificationContainer />
+      <ToastContainer />
     </Container>
   );
 }
