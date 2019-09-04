@@ -7,7 +7,7 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import { Login } from "../../services/firestore";
-import "./Login.css";
+import { Container } from "./style";
 import { NavBar } from "../../components/NavBar";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -37,7 +37,7 @@ const LoginPage = ({ history }) => {
   }
 
   return (
-    <div className="login_main-container">
+    <Container>
       <NavBar
         txtbtn="Home"
         btnFunc={() => {
@@ -65,7 +65,7 @@ const LoginPage = ({ history }) => {
         <Button>Entrar</Button>
       </form>
       <NotificationContainer />
-    </div>
+    </Container>
   );
 };
 
