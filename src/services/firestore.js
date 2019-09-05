@@ -29,7 +29,7 @@ async function Listar() {
     throw new Error("Algo deu errado: " + err.code + " - " + err.message);
   }
 }
-async function Adicionar2(insc) {
+async function Adicionar(insc) {
   try {
     if (ValidateKid(insc)) {
       const docRef = await Db.collection("Inscricoes").add(insc);
@@ -40,25 +40,6 @@ async function Adicionar2(insc) {
   } catch (error) {
     throw new Error("Erro ao adicionar: " + error.message);
   }
-}
-
-async function Adicionar(insc) {
-  let response;
-  if (ValidateKid(insc)) {
-    await Db.collection("Inscricoes")
-      .add(insc)
-      .then(docRef => {
-        console.log("sucesso: " + docRef.id);
-        response = true;
-      })
-      .catch(error => {
-        console.log("Erro: " + error);
-        response = false;
-      });
-  } else {
-    response = false;
-  }
-  return response;
 }
 
 async function Login(email, password) {
