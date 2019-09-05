@@ -18,11 +18,13 @@ const LoginPage = ({ history }) => {
       event.preventDefault();
       const { password, email } = event.target.elements;
       try {
+        if (email.value === "" || password.value === "") {
+          throw new Error("Email e senha precisam ser preenchidos");
+        }
         await Login(email.value, password.value);
         history.push("/list");
       } catch (error) {
         toast.error(error.message);
-        console.log(error);
       }
     },
     [history]

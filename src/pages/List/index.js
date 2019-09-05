@@ -13,16 +13,18 @@ export function List({ history }) {
     let lista = [];
 
     async function dados() {
-      lista = await Listar();
-      setValues(lista);
-    }
-    dados().catch(e => {
-      if (e.message === "permission-denied") {
-        toast.error("É preciso estar logado!");
-      } else {
-        toast.error(e.message);
+      try {
+        lista = await Listar();
+        setValues(lista);
+      } catch (error) {
+        if (error.message === "permission-denied") {
+          toast.error("É preciso estar logado!");
+        } else {
+          toast.error(error.message);
+        }
       }
-    });
+    }
+    dados();
   }, []);
 
   const headers = [
