@@ -54,15 +54,18 @@ async function Login(email, password) {
     const Credential = await auth.signInWithEmailAndPassword(email, password);
     return Credential;
   } catch (error) {
-    console.log(error.code, " + ", error.message);
+    console.log(error.code, ": ", error.message);
     throw new Error("Erro ao logar: " + error.code + " - " + error.message);
   }
 }
 
 async function LogOut() {
-  await auth.signOut().catch(function(error) {
-    console.log(error.code, " + ", error.message);
-  });
+  try {
+    await auth.signOut();
+  } catch (error) {
+    console.log(error.code, ": ", error.message);
+    throw new Error("Erro no Logout: " + error.code + " - " + error.message);
+  }
 }
 
 export { Listar, Adicionar, Login, LogOut };

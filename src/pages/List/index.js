@@ -38,14 +38,17 @@ export function List({ history }) {
     "Data de pagamento"
   ];
 
+  async function logOut() {
+    try {
+      await LogOut();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   return (
     <Contatiner>
-      <NavBar
-        txtbtn="LogOut"
-        btnFunc={() => {
-          LogOut().then(() => {});
-        }}
-      />
+      <NavBar txtbtn="LogOut" btnFunc={logOut} />
       <h1>INSCRITOS</h1>
       <Table Headers={headers} Values={values}></Table>
       <ToastContainer />
