@@ -11,16 +11,14 @@ export const useForm = (callback, initialState = {}, validate, notify) => {
   const onSubmit = async event => {
     event.preventDefault();
     try {
-      const err = validate(values);
-
-      if (Object.keys(err).length === 0) {
+      if (Object.keys(validate(values)).length === 0) {
         await callback();
         setValues(initialState);
         setErrors({});
         notify({});
       } else {
-        setErrors(err);
-        notify(errors);
+        setErrors(validate(values));
+        notify(validate(values));
       }
     } catch (error) {
       notify({ error: error.message });
