@@ -29,6 +29,18 @@ async function Listar() {
     throw new Error("Algo deu errado: " + err.code + " - " + err.message);
   }
 }
+async function Adicionar2(insc) {
+  try {
+    if (ValidateKid(insc)) {
+      const docRef = await Db.collection("Inscricoes").add(insc);
+      return docRef;
+    } else {
+      throw new Error("Dados preenchidos invalidos");
+    }
+  } catch (error) {
+    throw new Error("Erro ao adicionar: " + error.message);
+  }
+}
 
 async function Adicionar(insc) {
   let response;
