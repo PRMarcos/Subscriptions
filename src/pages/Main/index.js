@@ -7,6 +7,7 @@ import { Adicionar } from "../../services/firestore";
 import { Container, AlertContainer } from "./style";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { ValidateKid } from "../../Models/Kid";
 
 export function Main({ history }) {
   const [ok, setOk] = useState(false);
@@ -20,39 +21,6 @@ export function Main({ history }) {
     Phone: "",
     KidObs: "",
     PaymentDay: ""
-  };
-
-  const validateKidsForm = values => {
-    let errors = {};
-
-    if (values.KidName.trim() === "") {
-      errors.KidName = "Nome precisa ser preenchido";
-    }
-
-    if (values.KidChurch.trim() === "") {
-      errors.KidChurch = "Igreja precisa ser preenchida";
-    }
-
-    if (values.KidAge.trim() === "") {
-      errors.KidAge = "Idade precisa ser preenchida";
-    }
-
-    if (values.KidCity.trim() === "") {
-      errors.KidCity = "Cidade precisa ser preenchida";
-    }
-
-    if (values.KidParent.trim() === "") {
-      errors.KidParent = "Responsável precisa ser preenchido";
-    }
-
-    if (values.Phone.trim() === "") {
-      errors.Phone = "Telefone precisa ser preenchido";
-    }
-
-    if (values.PaymentDay.trim() === "") {
-      errors.PaymentDay = "Data de pagamento precisa ser preenchida";
-    }
-    return errors;
   };
 
   async function SaveData() {
@@ -91,7 +59,7 @@ export function Main({ history }) {
   const { values, errors, onChange, onSubmit } = useForm(
     SaveData,
     initialState,
-    validateKidsForm,
+    ValidateKid,
     notyfyError
   );
 

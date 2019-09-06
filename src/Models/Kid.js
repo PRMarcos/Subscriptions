@@ -1,4 +1,4 @@
-function ValidateKid(kid) {
+export const ValidateKid = kid => {
   let errors = {};
 
   if (kid.KidName.trim() === "") {
@@ -29,11 +29,5 @@ function ValidateKid(kid) {
     errors.PaymentDay = "Data de pagamento precisa ser preenchida";
   }
 
-  if (Object.keys(errors).length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-export { ValidateKid };
+  return errors;
+};

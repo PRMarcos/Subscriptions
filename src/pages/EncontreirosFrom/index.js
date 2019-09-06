@@ -7,6 +7,7 @@ import { AdicionarEncontreiro } from "../../services/firestore";
 import { Container, AlertContainer } from "./style";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { validateForm } from "../../Models/Encontreiro";
 
 export function EncontreirosFrom({ history }) {
   const [ok, setOk] = useState(false);
@@ -18,35 +19,6 @@ export function EncontreirosFrom({ history }) {
     City: "",
     Phone: "",
     PaymentDay: ""
-  };
-
-  const validateForm = values => {
-    let errors = {};
-
-    if (values.Name.trim() === "") {
-      errors.Name = "Nome precisa ser preenchido";
-    }
-
-    if (values.Church.trim() === "") {
-      errors.Church = "Igreja precisa ser preenchida";
-    }
-
-    if (values.Age.trim() === "") {
-      errors.Age = "Idade precisa ser preenchida";
-    }
-
-    if (values.City.trim() === "") {
-      errors.City = "Cidade precisa ser preenchida";
-    }
-
-    if (values.Phone.trim() === "") {
-      errors.Phone = "Telefone precisa ser preenchido";
-    }
-
-    if (values.PaymentDay.trim() === "") {
-      errors.PaymentDay = "Data de pagamento precisa ser preenchida";
-    }
-    return errors;
   };
 
   async function SaveData() {

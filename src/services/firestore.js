@@ -46,7 +46,7 @@ async function AdicionarEncontreiro(insc) {
 
 async function Adicionar(insc) {
   try {
-    if (ValidateKid(insc)) {
+    if (Object.keys(ValidateKid(insc)).length === 0) {
       const docRef = await Db.collection("Inscricoes").add(insc);
       return docRef;
     } else {
