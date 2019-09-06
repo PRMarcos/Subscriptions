@@ -13,16 +13,18 @@ export function List({ history }) {
     let lista = [];
 
     async function dados() {
-      lista = await Listar();
-      setValues(lista);
-    }
-    dados().catch(e => {
-      if (e.message === "permission-denied") {
-        toast.error("É preciso estar logado!");
-      } else {
-        toast.error(e.message);
+      try {
+        lista = await Listar();
+        setValues(lista);
+      } catch (error) {
+        if (error.message === "permission-denied") {
+          toast.error("É preciso estar logado!");
+        } else {
+          toast.error(error.message);
+        }
       }
-    });
+    }
+    dados();
   }, []);
 
   const headers = [
@@ -36,14 +38,17 @@ export function List({ history }) {
     "Data de pagamento"
   ];
 
+  async function logOut() {
+    try {
+      await LogOut();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   return (
     <Contatiner>
-      <NavBar
-        txtbtn="LogOut"
-        btnFunc={() => {
-          LogOut().then(() => {});
-        }}
-      />
+      <NavBar txtbtn="LogOut" btnFunc={logOut} />
       <h1>INSCRITOS</h1>
       <Table Headers={headers} Values={values}></Table>
       <ToastContainer />

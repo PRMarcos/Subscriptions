@@ -56,18 +56,20 @@ export function Main({ history }) {
   };
 
   async function SaveData() {
-    const response = await Adicionar({
-      KidName: values.KidName,
-      KidChurch: values.KidChurch,
-      KidAge: values.KidAge,
-      KidCity: values.KidCity,
-      KidParent: values.KidParent,
-      Phone: values.Phone,
-      KidObs: values.KidObs,
-      PaymentDay: values.PaymentDay
-    });
-
-    return response;
+    try {
+      await Adicionar({
+        KidName: values.KidName,
+        KidChurch: values.KidChurch,
+        KidAge: values.KidAge,
+        KidCity: values.KidCity,
+        KidParent: values.KidParent,
+        Phone: values.Phone,
+        KidObs: values.KidObs,
+        PaymentDay: values.PaymentDay
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   function notyfyError(err) {

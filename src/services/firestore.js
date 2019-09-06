@@ -6,61 +6,59 @@ const auth = app.auth();
 
 async function Listar() {
   let dados = [];
-  await Db.collection("Inscricoes")
-    .get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        const form = doc.data();
-        const obj = {
-          _id: doc.id,
-          KidName: form.KidName,
-          KidChurch: form.KidChurch,
-          KidAge: form.KidAge,
-          KidCity: form.KidCity,
-          KidParent: form.KidParent,
-          Phone: form.Phone,
-          KidObs: form.KidObs,
-          PaymentDay: form.PaymentDay
-        };
-        dados.push(obj);
-      });
-    })
-    .catch(err => {
-      dados = [];
-      throw new Error(err.code);
-    });
-  return dados;
-}
+  try {
+    const snapshot = await Db.collection("Inscricoes").get();
+    snapshot.forEach(doc => {
+      const form = doc.data();
+      const obj = {
+        _id: doc.id,
+        KidName: form.KidName,
+        KidChurch: form.KidChurch,
+        KidAge: form.KidAge,
+        KidCity: form.KidCity,
+        KidParent: form.KidParent,
+        Phone: form.Phone,
+        KidObs: form.KidObs,
+        PaymentDay: form.PaymentDay
+      };
 
-async function Adicionar(insc) {
-  let response;
-  if (ValidateKid(insc)) {
-    await Db.collection("Inscricoes")
-      .add(insc)
-      .then(docRef => {
-        console.log("sucesso: " + docRef.id);
-        response = true;
-      })
-      .catch(error => {
-        console.log("Erro: " + error);
-        response = false;
-      });
-  } else {
-    response = false;
+      dados.push(obj);
+    });
+    return dados;
+  } catch (err) {
+    throw new Error("Algo deu errado: " + err.code + " - " + err.message);
   }
-  return response;
+}
+async function Adicionar(insc) {
+  try {
+    if (ValidateKid(insc)) {
+      const docRef = await Db.collection("Inscricoes").add(insc);
+      return docRef;
+    } else {
+      throw new Error("Dados preenchidos invalidos");
+    }
+  } catch (error) {
+    throw new Error("Erro ao adicionar: " + error.message);
+  }
 }
 
 async function Login(email, password) {
-  await auth.signInWithEmailAndPassword(email, password).catch(error => {
-    console.log(error.code, " + ", error.message);
-  });
+  try {
+    const Credential = await auth.signInWithEmailAndPassword(email, password);
+    return Credential;
+  } catch (error) {
+    console.log(error.code, ": ", error.message);
+    throw new Error("Erro ao logar: " + error.code + " - " + error.message);
+  }
 }
 
 async function LogOut() {
-  await auth.signOut().catch(function(error) {
-    console.log(error.code, " + ", error.message);
-  });
+  try {
+    await auth.signOut();
+  } catch (error) {
+    console.log(error.code, ": ", error.message);
+    throw new Error("Erro no Logout: " + error.code + " - " + error.message);
+  }
 }
 
 export { Listar, Adicionar, Login, LogOut };
