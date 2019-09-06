@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "../../services/hooks";
 import { NavBar } from "../../components/NavBar";
-import { Adicionar } from "../../services/firestore";
+import { AdicionarEncontreiro } from "../../services/firestore";
 import { Container, AlertContainer } from "./style";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
