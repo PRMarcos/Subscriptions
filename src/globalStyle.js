@@ -6,14 +6,17 @@ export const Global = createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+    
      
 }  
 body, html { 
     height: 100%;
+
 } 
 
 body {
   background-color: rgb(190, 200, 255);
+ 
 }
 
 body,

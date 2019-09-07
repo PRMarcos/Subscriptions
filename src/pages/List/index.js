@@ -41,6 +41,7 @@ export function List({ history }) {
   async function logOut() {
     try {
       await LogOut();
+      history.push("/");
     } catch (error) {
       toast.error(error.message);
     }

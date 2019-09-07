@@ -10,7 +10,7 @@ export function Card(props) {
         <span> {description}</span>
       </StyledCardDesc>
 
-      <StyledCardButton onclick={buttonFuncition}>{butunText}</StyledCardButton>
+      <StyledCardButton onClick={buttonFuncition}>{butunText}</StyledCardButton>
     </StyledCard>
   );
 }

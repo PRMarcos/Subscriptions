@@ -68,13 +68,13 @@ export function EncontristasForm({ history }) {
   return (
     <Container>
       <NavBar
-        txtbtn="Admin"
+        txtbtn="Home"
         btnFunc={() => {
-          history.push("/autentication");
+          history.push("/");
         }}
       />
       <form onSubmit={onSubmit}>
-        <h1>INSCRIÇÕES</h1>
+        <h1>ENCONTRISTA</h1>
 
         <Input
           IsInvalid={errors.KidName}

@@ -70,9 +70,9 @@ export function EncontreirosFrom({ history }) {
   return (
     <Container>
       <NavBar
-        txtbtn="Admin"
+        txtbtn="Home"
         btnFunc={() => {
-          history.push("/autentication");
+          history.push("/");
         }}
       />
       <form onSubmit={onSubmit}>
