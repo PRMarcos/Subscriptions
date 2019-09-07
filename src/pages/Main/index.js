@@ -1,8 +1,7 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { NavBar } from "../../components/NavBar";
-import { Container } from "./style";
+import { Button } from "../../components/Button";
+import { Container, Card } from "./style";
 
 export function Main({ history }) {
   return (
@@ -13,8 +12,6 @@ export function Main({ history }) {
           history.push("/autentication");
         }}
       />
-      <h1>Em construçao ☻</h1>
-      <ToastContainer />
     </Container>
   );
 }
