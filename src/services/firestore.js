@@ -1,5 +1,6 @@
 import { app } from "./firebase";
 import { ValidateKid } from "../Models/Kid";
+import { validateForm } from "../Models/Encontreiro";
 
 const Db = app.firestore();
 const auth = app.auth();
@@ -29,9 +30,23 @@ async function Listar() {
     throw new Error("Algo deu errado: " + err.code + " - " + err.message);
   }
 }
+
+async function AdicionarEncontreiro(insc) {
+  try {
+    if (Object.keys(validateForm(insc)).length === 0) {
+      const docRef = await Db.collection("Encontreiros").add(insc);
+      return docRef;
+    } else {
+      throw new Error("Dados preenchidos invalidos");
+    }
+  } catch (error) {
+    throw new Error("Erro ao adicionar: " + error.message);
+  }
+}
+
 async function Adicionar(insc) {
   try {
-    if (ValidateKid(insc)) {
+    if (Object.keys(ValidateKid(insc)).length === 0) {
       const docRef = await Db.collection("Inscricoes").add(insc);
       return docRef;
     } else {
@@ -61,4 +76,4 @@ async function LogOut() {
   }
 }
 
-export { Listar, Adicionar, Login, LogOut };
+export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro };
