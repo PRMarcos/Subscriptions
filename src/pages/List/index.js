@@ -26,7 +26,7 @@ export function List({ history, tableHeaders, enc }) {
       }
     }
     dados();
-  }, [refresh]);
+  }, [refresh, enc]);
 
   async function deleteRow(id) {
     if (window.confirm("Excluir mesmo?")) {
