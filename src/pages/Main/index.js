@@ -11,7 +11,7 @@ export function Main({ history }) {
       <NavBar
         txtbtn="Admin"
         btnFunc={() => {
-          history.push("/list");
+          history.push("/admin");
         }}
       />
       <CardContainer>

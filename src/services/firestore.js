@@ -5,23 +5,35 @@ import { validateForm } from "../Models/Encontreiro";
 const Db = app.firestore();
 const auth = app.auth();
 
-async function Listar() {
-  let dados = [];
+async function excluir(collection, id) {
+  var docRef = Db.collection(collection).doc(id);
+
   try {
-    const snapshot = await Db.collection("Inscricoes").get();
+    const doc = await docRef.get();
+
+    if (doc.exists) {
+      doc.ref.delete();
+    } else {
+      throw new Error("Documento nao encontrado");
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+async function Listar(enc) {
+  let dados = [];
+  let obj = {};
+  try {
+    const snapshot = await Db.collection(enc).get();
     snapshot.forEach(doc => {
       const form = doc.data();
-      const obj = {
-        _id: doc.id,
-        KidName: form.KidName,
-        KidChurch: form.KidChurch,
-        KidAge: form.KidAge,
-        KidCity: form.KidCity,
-        KidParent: form.KidParent,
-        Phone: form.Phone,
-        KidObs: form.KidObs,
-        PaymentDay: form.PaymentDay
-      };
+
+      if (enc === "Inscricoes") {
+        obj = arrangeKid(doc.id, form);
+      } else {
+        obj = arrangeEnc(doc.id, form);
+      }
 
       dados.push(obj);
     });
@@ -29,6 +41,32 @@ async function Listar() {
   } catch (err) {
     throw new Error("Algo deu errado: " + err.code + " - " + err.message);
   }
+}
+
+function arrangeKid(id, data) {
+  return {
+    _id: id,
+    KidName: data.KidName,
+    KidChurch: data.KidChurch,
+    KidAge: data.KidAge,
+    KidCity: data.KidCity,
+    KidParent: data.KidParent,
+    Phone: data.Phone,
+    KidObs: data.KidObs,
+    PaymentDay: data.PaymentDay
+  };
+}
+
+function arrangeEnc(id, data) {
+  return {
+    _id: id,
+    Name: data.Name,
+    Church: data.Church,
+    Age: data.Age,
+    City: data.City,
+    Phone: data.Phone,
+    PaymentDay: data.PaymentDay
+  };
 }
 
 async function AdicionarEncontreiro(insc) {
@@ -76,4 +114,4 @@ async function LogOut() {
   }
 }
 
-export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro };
+export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro, excluir };

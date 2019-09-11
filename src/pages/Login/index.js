@@ -22,7 +22,7 @@ const LoginPage = ({ history }) => {
           throw new Error("Email e senha precisam ser preenchidos");
         }
         await Login(email.value, password.value);
-        history.push("/list");
+        history.push("/admin");
       } catch (error) {
         toast.error(error.message);
       }
@@ -32,7 +32,7 @@ const LoginPage = ({ history }) => {
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Redirect to="/list" />;
+    return <Redirect to="/admin" />;
   }
 
   return (
