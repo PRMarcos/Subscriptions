@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Listar } from "../../services/firestore";
+import { Listar, excluir } from "../../services/firestore";
 import { NavBar } from "../../components/NavBar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +8,7 @@ import { Contatiner } from "./style";
 
 export function List({ history, tableHeaders, enc }) {
   const [values, setValues] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     let lista = [];
@@ -25,7 +26,14 @@ export function List({ history, tableHeaders, enc }) {
       }
     }
     dados();
-  }, []);
+  }, [refresh]);
+
+  async function deleteRow(id) {
+    if (window.confirm("Excluir mesmo?")) {
+      await excluir(enc, id);
+      setRefresh(true);
+    }
+  }
 
   return (
     <Contatiner>
@@ -39,7 +47,12 @@ export function List({ history, tableHeaders, enc }) {
         {enc === "Encontreiros" ? "Encontreiros" : "Encontristas"}:{" "}
         {values.length}
       </h1>
-      <Table Headers={tableHeaders} Values={values}></Table>
+      <Table
+        Headers={tableHeaders}
+        Values={values}
+        btnX
+        deleteRow={deleteRow}
+      ></Table>
       <ToastContainer />
     </Contatiner>
   );

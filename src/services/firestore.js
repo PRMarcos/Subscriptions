@@ -5,8 +5,23 @@ import { validateForm } from "../Models/Encontreiro";
 const Db = app.firestore();
 const auth = app.auth();
 
+async function excluir(collection, id) {
+  var docRef = Db.collection(collection).doc(id);
+
+  try {
+    const doc = await docRef.get();
+
+    if (doc.exists) {
+      doc.ref.delete();
+    } else {
+      throw new Error("Documento nao encontrado");
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 async function Listar(enc) {
-  console.log(enc);
   let dados = [];
   let obj = {};
   try {
@@ -99,4 +114,4 @@ async function LogOut() {
   }
 }
 
-export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro };
+export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro, excluir };

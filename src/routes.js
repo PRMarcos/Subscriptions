@@ -19,7 +19,8 @@ const encontristaHeaders = [
   "Responsável",
   "Telefone",
   "Observaçõs",
-  "Data de pagamento"
+  "Data de pagamento",
+  "Excluir"
 ];
 
 const encontreiroHeaders = [
@@ -28,7 +29,8 @@ const encontreiroHeaders = [
   "Idade",
   "Cidade",
   "Telefone",
-  "Data de pagamento"
+  "Data de pagamento",
+  "Excluir"
 ];
 export default function Routes() {
   return (
