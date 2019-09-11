@@ -5,16 +5,25 @@ import { LogOut } from "../../services/firestore";
 
 import { Container, OptionContainer } from "./style";
 
-export function Admin({ history }) {
+const Admin = ({ history }) => {
   return (
     <Container>
       <NavBar
-        txtbtn="logout"
-        btnFunc={async () => {
-          await LogOut();
+        txtbtn="Home"
+        btnFunc={() => {
           history.push("/");
         }}
-      />
+      >
+        <Button
+          small
+          btnFunc={async () => {
+            await LogOut();
+            history.push("/");
+          }}
+        >
+          LogOut
+        </Button>
+      </NavBar>
       <OptionContainer>
         <h1>Administração:</h1>
         <Button
@@ -44,4 +53,5 @@ export function Admin({ history }) {
       </OptionContainer>
     </Container>
   );
-}
+};
+export { Admin };

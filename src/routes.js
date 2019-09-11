@@ -6,6 +6,7 @@ import { List } from "./pages/List";
 import LoginPage from "./pages/Login";
 import { AuthProvider } from "./services/auth";
 import { PrivateRoute } from "./PrivateRoute";
+import { PrivateListRoute } from "./PrivateListRoute";
 import { EncontreirosFrom } from "./pages/EncontreirosFrom";
 import { EncontristasForm } from "./pages/EncontristasForm";
 import { Admin } from "./pages/Admin";
@@ -35,34 +36,27 @@ export default function Routes() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Main} />
-          <PrivateRoute path="/list" exact component={List} />
-          <Route path="/admin" exact component={Admin} />
+          <PrivateRoute path="/admin" exact component={Admin} />
           <Route path="/autentication" exact component={LoginPage} />
           <Route path="/encontreiro" exact component={EncontreirosFrom} />
           <Route path="/encontristas" exact component={EncontristasForm} />
-          <Route
+
+          <PrivateListRoute
             path="/list/encontristas"
             exact
-            render={props => (
-              <List
-                {...props}
-                tableHeaders={encontristaHeaders}
-                enc={"Inscricoes"}
-              />
-            )}
+            component={List}
+            tableHeaders={encontristaHeaders}
+            enc={"Inscricoes"}
           />
 
-          <Route
+          <PrivateListRoute
             path="/list/encontreiros"
             exact
-            render={props => (
-              <List
-                {...props}
-                tableHeaders={encontreiroHeaders}
-                enc={"Encontreiros"}
-              />
-            )}
+            component={List}
+            tableHeaders={encontreiroHeaders}
+            enc={"Encontreiros"}
           />
+
           <Route path="*" component={() => <Redirect to={"/"}></Redirect>} />
         </Switch>
       </BrowserRouter>
