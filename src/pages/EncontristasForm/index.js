@@ -43,6 +43,7 @@ export function EncontristasForm({ history }) {
   function notyfyError(err) {
     let msgError = "";
     if (Object.keys(err).length === 0) {
+      setOk(false);
       toast.success("Inscrição enviada");
     } else {
       if (Object.keys(err).length > 1) {
@@ -64,7 +65,13 @@ export function EncontristasForm({ history }) {
   );
 
   const aviso =
-    "Sobre o pagamento: Para garantir a vaga e preciso uma entrada de 40 reais e o restante pode ser pago até o dia 29/09. Dá pra passar no cartão e dividir em 4x porém tem um acréscimo de 15% da taxa de cartão (taxa alta devido à necessidade do adiantamento das parcelas)";
+    "Sobre o pagamento: Para garantir a vaga " +
+    "e necessário uma entrada de R$40,00. " +
+    "O restante pode ser pago até o dia 29/09/2019. " +
+    "É possível parcelar em 4x no cartão de crédito " +
+    "porém tem um acréscimo de 15% da taxa de cartão " +
+    "(taxa alta devido à necessidade do adiantamento das parcelas)";
+
   return (
     <Container>
       <NavBar

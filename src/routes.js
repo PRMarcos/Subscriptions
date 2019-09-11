@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { Main } from "./pages/Main";
 import { List } from "./pages/List";
@@ -19,7 +19,7 @@ export default function Routes() {
           <Route path="/autentication" exact component={LoginPage} />
           <Route path="/encontreiro" exact component={EncontreirosFrom} />
           <Route path="/encontrista" exact component={EncontristasForm} />
-          <Route path="*" component={() => <h1>Page not found</h1>} />
+          <Route path="*" component={() => <Redirect to={"/"}></Redirect>} />
         </Switch>
       </BrowserRouter>
     </AuthProvider>
