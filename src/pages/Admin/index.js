@@ -20,7 +20,7 @@ export function Admin({ history }) {
         <Button
           small
           btnFunc={() => {
-            history.push("/list");
+            history.push("/list/encontristas");
           }}
         >
           Listar Encontristas
@@ -28,7 +28,7 @@ export function Admin({ history }) {
         <Button
           small
           btnFunc={() => {
-            history.push("/list");
+            history.push("/list/encontreiros");
           }}
         >
           Listar Encontreiros

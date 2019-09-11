@@ -10,6 +10,25 @@ import { EncontreirosFrom } from "./pages/EncontreirosFrom";
 import { EncontristasForm } from "./pages/EncontristasForm";
 import { Admin } from "./pages/Admin";
 
+const encontristaHeaders = [
+  "Nome",
+  "Igreja",
+  "Idade",
+  "Cidade",
+  "Responsável",
+  "Telefone",
+  "Observaçõs",
+  "Data de pagamento"
+];
+
+const encontreiroHeaders = [
+  "Nome",
+  "Igreja",
+  "Idade",
+  "Cidade",
+  "Telefone",
+  "Data de pagamento"
+];
 export default function Routes() {
   return (
     <AuthProvider>
@@ -20,7 +39,30 @@ export default function Routes() {
           <Route path="/admin" exact component={Admin} />
           <Route path="/autentication" exact component={LoginPage} />
           <Route path="/encontreiro" exact component={EncontreirosFrom} />
-          <Route path="/encontrista" exact component={EncontristasForm} />
+          <Route path="/encontristas" exact component={EncontristasForm} />
+          <Route
+            path="/list/encontristas"
+            exact
+            render={props => (
+              <List
+                {...props}
+                tableHeaders={encontristaHeaders}
+                enc={"Inscricoes"}
+              />
+            )}
+          />
+
+          <Route
+            path="/list/encontreiros"
+            exact
+            render={props => (
+              <List
+                {...props}
+                tableHeaders={encontreiroHeaders}
+                enc={"Encontreiros"}
+              />
+            )}
+          />
           <Route path="*" component={() => <Redirect to={"/"}></Redirect>} />
         </Switch>
       </BrowserRouter>
