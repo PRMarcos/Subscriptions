@@ -41,7 +41,7 @@ export default function Routes() {
           <PrivateRoute path="/admin" exact component={Admin} />
           <Route path="/autentication" exact component={LoginPage} />
           <Route path="/encontreiro" exact component={EncontreirosFrom} />
-          <Route path="/encontristas" exact component={EncontristasForm} />
+          <Route path="/encontrista" exact component={EncontristasForm} />
 
           <PrivateListRoute
             path="/list/encontristas"
