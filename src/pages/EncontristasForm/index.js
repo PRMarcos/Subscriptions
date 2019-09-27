@@ -75,9 +75,12 @@ export function EncontristasForm({ history }) {
     "porém tem um acréscimo de 15% da taxa de cartão " +
     "(taxa alta devido à necessidade do adiantamento das parcelas)";
 
-  const { EnconstristasIsClosed } = useContext(AuthContext);
+  const { EnconstristasIsClosed, currentUser } = useContext(AuthContext);
+
   if (EnconstristasIsClosed) {
-    return <Redirect to="/encerrado" />;
+    if (!currentUser) {
+      return <Redirect to="/encerrado" />;
+    }
   }
 
   return (
