@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "../../services/hooks";
+import { AuthContext } from "../../services/auth";
 import { NavBar } from "../../components/NavBar";
 import { Adicionar } from "../../services/firestore";
 import { Container, AlertContainer } from "./style";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { ValidateKid } from "../../Models/Kid";
+import { Redirect } from "react-router-dom";
+
 
 export function EncontristasForm({ history }) {
   const [ok, setOk] = useState(false);
@@ -71,6 +74,11 @@ export function EncontristasForm({ history }) {
     "É possível parcelar em 4x no cartão de crédito " +
     "porém tem um acréscimo de 15% da taxa de cartão " +
     "(taxa alta devido à necessidade do adiantamento das parcelas)";
+
+  const { EnconstristasIsClosed } = useContext(AuthContext);
+  if (EnconstristasIsClosed) {
+    return <Redirect to="/encerrado" />;
+  }
 
   return (
     <Container>
