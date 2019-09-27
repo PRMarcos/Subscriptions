@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../services/auth";
 import { NavBar } from "../../components/NavBar";
 import { Button } from "../../components/Button";
-import { LogOut } from "../../services/firestore";
+import { LogOut, OpenSubs, CloseSubs } from "../../services/firestore";
 import { Listar } from "../../services/firestore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Container, OptionContainer } from "./style";
+import { Container, OptionContainer, Danger } from "./style";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 
+
 const Admin = ({ history }) => {
+  const { setEnconstristasClosed, EnconstristasIsClosed } = useContext(AuthContext);
   async function handleExport() {
     try {
       const Encontreiros = await Listar("Encontreiros");
@@ -31,48 +34,96 @@ const Admin = ({ history }) => {
       toast.error(error.message);
     }
   }
+
+  async function handleCloseSubs() {
+    try {
+      if (window.confirm("Fechar mesmo?")) {
+        await CloseSubs("Encontristas");
+        setEnconstristasClosed(true);
+        toast.success("Status alterado com sucesso");
+      } else {
+        toast.warn("Nada feito");
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+    }
+
+  }
+
+  async function handleOpenSubs() {
+    try {
+      if (window.confirm("Abrir mesmo?")) {
+        await OpenSubs("Encontristas");
+        setEnconstristasClosed(false);
+        toast.success("Status alterado com sucesso");
+      } else {
+        toast.warn("Nada feito");
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
   return (
-    <Container>
-      <NavBar
-        txtbtn="Home"
-        btnFunc={() => {
-          history.push("/");
-        }}
-      >
-        <Button
-          small
-          btnFunc={async () => {
-            await LogOut();
+    <React.Fragment>
+
+
+
+      <Container>
+        <NavBar
+          txtbtn="Home"
+          btnFunc={() => {
             history.push("/");
           }}
         >
-          LogOut
+          <Button
+            small
+            btnFunc={async () => {
+              await LogOut();
+              history.push("/");
+            }}
+          >
+            LogOut
+    </Button>
+        </NavBar>
+
+        <OptionContainer>
+          <h1>Administração:</h1>
+          <Button
+            small
+            btnFunc={() => {
+              history.push("/list/encontristas");
+            }}
+          >
+            Listar Encontristas
         </Button>
-      </NavBar>
-      <OptionContainer>
-        <h1>Administração:</h1>
-        <Button
-          small
-          btnFunc={() => {
-            history.push("/list/encontristas");
-          }}
-        >
-          Listar Encontristas
+          <Button
+            small
+            btnFunc={() => {
+              history.push("/list/encontreiros");
+            }}
+          >
+            Listar Encontreiros
         </Button>
-        <Button
-          small
-          btnFunc={() => {
-            history.push("/list/encontreiros");
-          }}
-        >
-          Listar Encontreiros
+          <Button small btnFunc={handleExport}>
+            Exportar
         </Button>
-        <Button small btnFunc={handleExport}>
-          Exportar
+          <Danger closed={EnconstristasIsClosed}>
+            <div>Encontristas<br /> Status: <span>{EnconstristasIsClosed ? "Fechado" : "Aberto"} </span></div>
+            <Button small btnFunc={handleCloseSubs}>
+              Fechar inscrições
         </Button>
-      </OptionContainer>
-      <ToastContainer />
-    </Container>
+            <Button small btnFunc={handleOpenSubs}>
+              Abrir inscriçõees
+        </Button>
+
+          </Danger>
+
+        </OptionContainer>
+        <ToastContainer />
+      </Container>
+    </React.Fragment >
   );
 };
 export { Admin };

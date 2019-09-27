@@ -82,6 +82,33 @@ async function AdicionarEncontreiro(insc) {
   }
 }
 
+async function CloseSubs(Type) {
+  try {
+    await Db.collection("Setup").doc(Type).set({ closed: true });
+  } catch (error) {
+    throw new Error("Erro ao fechar inscrição: " + error.message);
+  }
+}
+
+async function OpenSubs(Type) {
+  try {
+    await Db.collection("Setup").doc(Type).set({ closed: false });
+  } catch (error) {
+    throw new Error("Erro ao fechar inscrição: " + error.message);
+  }
+}
+
+async function GetState(Type) {
+  try {
+    const docRef = await Db.collection("Setup").doc(Type).get()
+    return docRef.data();
+  } catch (error) {
+    throw new Error("Erro ao fechar inscrição: " + error.message);
+  }
+}
+
+
+
 async function Adicionar(insc) {
   try {
     if (Object.keys(ValidateKid(insc)).length === 0) {
@@ -114,4 +141,4 @@ async function LogOut() {
   }
 }
 
-export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro, excluir };
+export { Listar, Adicionar, Login, LogOut, AdicionarEncontreiro, excluir, CloseSubs, OpenSubs, GetState };

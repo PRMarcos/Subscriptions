@@ -9,6 +9,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PrivateListRoute } from "./PrivateListRoute";
 import { EncontreirosFrom } from "./pages/EncontreirosFrom";
 import { EncontristasForm } from "./pages/EncontristasForm";
+import { VacanciesClosedPage } from "./pages/VacanciesClosedPage";
 import { Admin } from "./pages/Admin";
 
 const encontristaHeaders = [
@@ -42,6 +43,7 @@ export default function Routes() {
           <Route path="/autentication" exact component={LoginPage} />
           <Route path="/encontreiro" exact component={EncontreirosFrom} />
           <Route path="/encontrista" exact component={EncontristasForm} />
+          <Route path="/encerrado" exact component={VacanciesClosedPage} />
 
           <PrivateListRoute
             path="/list/encontristas"
